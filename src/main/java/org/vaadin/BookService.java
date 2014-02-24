@@ -30,9 +30,13 @@ public class BookService {
     @PersistenceContext(unitName = "book-pu")
     private EntityManager entityManager;
 
-    public void addBook(Book book)
+    public void saveOrPersist(Book book)
     {
-      entityManager.persist(book);
+        if(book.getBookId() > 0) {
+            entityManager.merge(book);
+        } else {
+            entityManager.persist(book);
+        }
     }
 
     public List<Book> getAllBooks()
@@ -40,5 +44,13 @@ public class BookService {
         CriteriaQuery<Book> cq = entityManager.getCriteriaBuilder().createQuery(Book.class);
         cq.select(cq.from(Book.class));
         return entityManager.createQuery(cq).getResultList();
+    }
+    
+    public void deleteBook(Book book) {
+        if(book.getBookId() > 0) {
+            // reattach to remove
+            book = entityManager.merge(book);
+            entityManager.remove(book);
+        }
     }
 }
