@@ -33,6 +33,36 @@
       <version>6.0-5</version>
       <scope>provided</scope>
     </dependency>
+    
+    <!-- Vaadin core with precompiled theme and widgetset -->
+    <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-server</artifactId>
+        <version>${vaadin.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-themes</artifactId>
+        <version>${vaadin.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-client-compiled</artifactId>
+        <version>${vaadin.version}</version>
+    </dependency>
+
+    <!-- Vaadin CDI Add-On -->
+    <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-cdi</artifactId>
+        <version>1.0.0.alpha1</version>
+    </dependency>
+    <!-- A helper library for generic Vaadin apps -->
+    <dependency>
+        <groupId>org.peimari</groupId>
+        <artifactId>maddon</artifactId>
+        <version>1.2</version>
+    </dependency>
 
     <!-- to test with TomEE and Arquillian
     <dependency>
@@ -146,5 +176,6 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <vaadin.version>7.1.11</vaadin.version>
   </properties>
 </project>
