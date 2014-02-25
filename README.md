@@ -1,6 +1,6 @@
-# "Vaadinized" JEE6 app stub for TomEE
+# "Vaadinized" Java EE 6 app stub for TomEE
 
-Apache TomEE is an increasingly popular certified JEE server that is based on Tomcat and other Apache libraries like OpenJPA and OpenEJB.
+Apache TomEE is an increasingly popular certified Java EE server that is based on Tomcat and other Apache libraries like OpenJPA and OpenEJB.
 
 TomEE has a small and clean archetype (tomee-webapp-archetype) for JPA backed web apps. It implements a simple book inventory app, but the default UI is built with faces and is rather harsh. To help you to get started quicker with [my favourite UI technology](https://vaadin.com), I modified the generated app stub to replicate the same UI with Vaadin.
 
