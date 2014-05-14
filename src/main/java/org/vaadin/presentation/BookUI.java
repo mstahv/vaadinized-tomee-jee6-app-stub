@@ -1,21 +1,23 @@
 package org.vaadin.presentation;
 
+import com.vaadin.annotations.Theme;
 import com.vaadin.cdi.CDIUI;
-import org.vaadin.BookService;
-import org.vaadin.entities.Book;
-import org.vaadin.presentation.BookEvent.Type;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.UI;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
+import org.vaadin.BookService;
+import org.vaadin.entities.Book;
 import org.vaadin.maddon.fields.MTable;
 import org.vaadin.maddon.fields.MValueChangeEvent;
 import org.vaadin.maddon.fields.MValueChangeListener;
 import org.vaadin.maddon.label.Header;
 import org.vaadin.maddon.layouts.MVerticalLayout;
+import org.vaadin.presentation.BookEvent.Type;
 
 @CDIUI
+@Theme("dawn")
 public class BookUI extends UI {
 
     @Inject
