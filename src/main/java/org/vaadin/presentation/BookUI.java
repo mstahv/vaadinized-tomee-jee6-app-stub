@@ -26,10 +26,12 @@ public class BookUI extends UI {
     @Inject
     BookEditor bookEditor;
 
-    MTable<Book> bookTable = new MTable().withProperties("bookId", "bookTitle").withColumnHeaders("ID", "Title");
+    MTable<Book> bookTable = new MTable()
+            .withProperties("bookId", "bookTitle", "author")
+            .withColumnHeaders("ID", "Title", "Author");
 
     Header header = new Header(
-            "This is a simple TomEE + Vaadin CDI example project");
+            "This is a Java EE 6 + Vaadin CDI example");
 
     @Override
     public void init(VaadinRequest request) {

@@ -23,6 +23,7 @@ public class BookEditor extends Window implements Button.ClickListener {
     private Book book;
 
     private final MTextField bookTitle = new MTextField("Book Title");
+    private final MTextField author = new MTextField("Author");
 
     /* Action buttons */
     private final Button cancel = new Button("Cancel", this);
@@ -35,8 +36,13 @@ public class BookEditor extends Window implements Button.ClickListener {
     public BookEditor() {
         setCaption("Edit Book:");
         setModal(true);
-        setContent(new MVerticalLayout(bookTitle, new MHorizontalLayout(save,
-                cancel, delete).withMargin(false)));
+        setContent(
+            new MVerticalLayout(
+                bookTitle, 
+                author, 
+                new MHorizontalLayout(save,cancel, delete).withMargin(false)
+            )
+        );
     }
 
     public void setBook(Book book) {

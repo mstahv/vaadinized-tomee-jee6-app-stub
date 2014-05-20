@@ -24,6 +24,7 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int bookId;
     private String bookTitle;
+    private String author;
 
     public int getBookId() {
         return bookId;
@@ -39,6 +40,14 @@ public class Book {
 
     public void setBookTitle(String bookName) {
         this.bookTitle = bookName;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @Override
