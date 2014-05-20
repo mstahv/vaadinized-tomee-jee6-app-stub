@@ -39,11 +39,20 @@
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-server</artifactId>
         <version>${vaadin.version}</version>
-    </dependency>
-    <dependency>
+        <exclusions>
+        	<exclusion>
+        		<artifactId>guava</artifactId>
+        		<groupId>com.vaadin.external.google</groupId>
+        	</exclusion>
+          <exclusion>
+            <artifactId>vaadin-sass-compiler</artifactId>
         <groupId>com.vaadin</groupId>
-        <artifactId>vaadin-themes</artifactId>
-        <version>${vaadin.version}</version>
+          </exclusion>
+          <exclusion>
+            <artifactId>flute</artifactId>
+            <groupId>com.vaadin.external.flute</groupId>
+          </exclusion>
+        </exclusions>
     </dependency>
     <dependency>
         <groupId>com.vaadin</groupId>
