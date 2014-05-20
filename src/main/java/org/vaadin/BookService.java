@@ -16,15 +16,18 @@
  */
 package org.vaadin;
 
-import org.vaadin.entities.Book;
+import java.util.List;
 
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
-import java.util.List;
+
+import org.vaadin.entities.Book;
 
 @Stateless
+@Resource(lookup="jdbc/SQLDB-BOOK-EXAMPLE")
 public class BookService {
 
     @PersistenceContext(unitName = "book-pu")
