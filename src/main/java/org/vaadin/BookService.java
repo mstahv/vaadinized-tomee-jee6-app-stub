@@ -23,6 +23,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Root;
 
 @Stateless
 public class BookService {
@@ -52,5 +54,17 @@ public class BookService {
             book = entityManager.merge(book);
             entityManager.remove(book);
         }
+    }
+    
+    public Book findById(int bookId) {
+        return entityManager.find(Book.class, bookId);
+    }
+    
+    public List<Book> findByTitle(String bookTitle) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Book> q = cb.createQuery(Book.class);
+        Root<Book> r = q.from(Book.class);
+        CriteriaQuery<Book> cq = q.select(r).where(cb.equal(r.get("bookTitle"), bookTitle));
+        return entityManager.createQuery(cq).getResultList();
     }
 }

@@ -16,10 +16,11 @@
  */
 package org.vaadin.entities;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-public class Book {
+public class Book implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int bookId;
