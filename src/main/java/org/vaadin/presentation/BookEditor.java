@@ -37,6 +37,11 @@ public class BookEditor extends Window implements Button.ClickListener {
         setModal(true);
         setContent(new MVerticalLayout(bookTitle, new MHorizontalLayout(save,
                 cancel, delete).withMargin(false)));
+        
+        // add some id to dom to aid testing
+        setId("bookEditor");
+        bookTitle.setId("bookTitle");
+
     }
 
     public void setBook(Book book) {
