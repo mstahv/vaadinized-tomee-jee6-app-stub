@@ -36,8 +36,7 @@ public class ArquilliantExampleTest {
                 .addPackage(BookUI.class.getPackage())
                 .addClasses(BookService.class, Book.class)
                 .addAsResource("META-INF/persistence.xml")
-                .addAsWebInfResource(EmptyAsset.INSTANCE, ArchivePaths.create(
-                                "beans.xml"))
+                .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsLibraries(runtime.resolve().withTransitivity().asFile());
         return war;
     }
