@@ -1,7 +1,6 @@
 
 package org.vaadin.tbtests;
 
-import org.jboss.arquillian.graphene.fragment.Root;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -10,16 +9,13 @@ import org.openqa.selenium.support.FindBy;
  */
 public class EditorFragment {
     
-    @Root
-    WebElement bookEditor;
-    
     @FindBy(xpath = "//*[text() = 'Save']")
-    WebElement saveButton;
+    private WebElement saveButton;
     
     // No parameter to @FindBy -> finds element with id "bookTitle",
     // derived from the java field name
     @FindBy
-    WebElement bookTitle;
+    private WebElement bookTitle;
     
     public void typeNameOfTheBook(String name) {
         bookTitle.sendKeys(name);
@@ -28,7 +24,5 @@ public class EditorFragment {
     public void save() {
         saveButton.click();
     }
-
-
 
 }
