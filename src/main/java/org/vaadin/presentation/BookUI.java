@@ -15,9 +15,10 @@ import org.vaadin.maddon.fields.MValueChangeListener;
 import org.vaadin.maddon.label.Header;
 import org.vaadin.maddon.layouts.MVerticalLayout;
 import org.vaadin.presentation.BookEvent.Type;
+import org.vaadin.tb.tools.TbHelper;
 
-@CDIUI
-@Theme("dawn")
+@CDIUI("")
+@Theme("valo")
 public class BookUI extends UI {
 
     @Inject
@@ -26,7 +27,8 @@ public class BookUI extends UI {
     @Inject
     BookEditor bookEditor;
 
-    MTable<Book> bookTable = new MTable().withProperties("bookId", "bookTitle").withColumnHeaders("ID", "Title");
+    MTable<Book> bookTable = new MTable().withProperties("bookId", "bookTitle").
+            withColumnHeaders("ID", "Title");
 
     Header header = new Header(
             "This is a simple TomEE + Vaadin CDI example project");
@@ -57,6 +59,14 @@ public class BookUI extends UI {
         });
 
         setContent(new MVerticalLayout(header, addButton, bookTable));
+
+        // Automatically set identifiers for fields in this instance
+        TbHelper.assignIndentifiers(this);
+        
+        // for lazy initialized components, it is better set idenfiers 
+        // once attached
+        bookEditor.addAttachListener(e->TbHelper.assignIndentifiers(bookEditor));
+
     }
 
     // Controller methods, in a big project, consider using separate
@@ -78,11 +88,10 @@ public class BookUI extends UI {
         bookEditor.setBook(new Book());
         addWindow(bookEditor);
     }
-    
+
     /* These methods get called by CDI event system, in this example events
      * are arised from BookEditor.
      */
-
     void saveBook(@Observes @BookEvent(Type.SAVE) Book book) {
         bookService.saveOrPersist(book);
         listBooks();

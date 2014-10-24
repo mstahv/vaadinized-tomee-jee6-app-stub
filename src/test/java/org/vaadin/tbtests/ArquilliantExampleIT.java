@@ -24,7 +24,7 @@ import org.vaadin.presentation.BookUI;
  *
  */
 @RunWith(Arquillian.class)
-public class ArquilliantExampleTest {
+public class ArquilliantExampleIT {
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
