@@ -1,6 +1,7 @@
 package org.vaadin.tbtests;
 
 import java.net.URL;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -14,6 +15,8 @@ import org.jboss.arquillian.warp.Activity;
 import org.jboss.arquillian.warp.Inspection;
 import org.jboss.arquillian.warp.Warp;
 import org.jboss.arquillian.warp.WarpTest;
+import org.jboss.arquillian.warp.client.filter.http.HttpFilters;
+import org.jboss.arquillian.warp.client.filter.http.HttpMethod;
 import org.jboss.arquillian.warp.servlet.AfterServlet;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
@@ -78,12 +81,10 @@ public class MixingClientAndServerUsingWarpIT {
 
             @Override
             public void perform() {
-                editorFragment = mainPage.
-                    clickNewBookButton();
-                editorFragment.typeNameOfTheBook(nameOfNewBook);
-
-                editorFragment.save();
-
+                editorFragment = mainPage.clickNewBookButton();
+                
+                editorFragment.typeNameOfTheBook(nameOfNewBook + "\n"); // enter to autoclose window
+ 
                 // Note, that no ajax savvy haxies niided. Even with implicit timeouts, 
                 // this would fail without TestBench
                 mainPage.assertBookInListing(nameOfNewBook);
@@ -91,7 +92,10 @@ public class MixingClientAndServerUsingWarpIT {
             }
 
         })
-        //.observe(HttpFilters.request()...) // Used as filter to only run Inspection on certain requests
+         // Used as filter to only run Inspection on certain requests
+         // Only do inspection afters saving, which is second XHR by vaadin 
+         // "thin client"
+        .observe(HttpFilters.request().method().equal(HttpMethod.POST).index(2))
         .inspect(new Inspection() {
             private static final long serialVersionUID = 1L;
 
@@ -100,12 +104,8 @@ public class MixingClientAndServerUsingWarpIT {
 
             @AfterServlet
             public void verifyFromEjb() {
-                // FIXME how to make this work??
-                // I'd want this check to be executed once in the server container
-                // after the WebDriver stuff has been executed.
-                // AfterServlet seems to try it after each request, and injected service don't work
-                Assert.assertEquals(1, service.
-                        findByTitle(nameOfNewBook).size());
+                List<Book> findByTitle = service.findByTitle(nameOfNewBook);
+                Assert.assertEquals(1, findByTitle.size());
             }
         });
 

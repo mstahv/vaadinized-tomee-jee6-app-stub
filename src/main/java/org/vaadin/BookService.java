@@ -34,6 +34,7 @@ public class BookService {
 
     public void saveOrPersist(Book book)
     {
+        book.setBookTitle(book.getBookTitle().trim());
         if(book.getBookId() > 0) {
             entityManager.merge(book);
         } else {

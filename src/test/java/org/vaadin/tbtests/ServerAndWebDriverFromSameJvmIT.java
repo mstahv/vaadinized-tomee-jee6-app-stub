@@ -21,7 +21,8 @@ import org.vaadin.entities.Book;
 import org.vaadin.presentation.BookUI;
 
 /**
- *
+ * Note, that this example only works with embedded containers. The Warp example
+ * is more robust as selenium stuff is not on the server JVM.
  */
 @RunWith(Arquillian.class)
 public class ServerAndWebDriverFromSameJvmIT {
@@ -78,8 +79,7 @@ public class ServerAndWebDriverFromSameJvmIT {
 
         EditorFragment editorFragment = mainPage.clickNewBookButton();
         
-        editorFragment.typeNameOfTheBook(nameOfNewBook);
-        editorFragment.save();
+        editorFragment.typeNameOfTheBook(nameOfNewBook + "\n");
 
         // Note, that no ajax savvy haxies niided. Even with implicit timeouts, 
         // this would fail without TestBench

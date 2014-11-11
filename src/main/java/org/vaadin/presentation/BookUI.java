@@ -33,6 +33,14 @@ public class BookUI extends UI {
     Header header = new Header(
             "This is a simple TomEE + Vaadin CDI example project");
 
+    Button addNewButton = new Button("+", new Button.ClickListener() {
+
+        @Override
+        public void buttonClick(Button.ClickEvent event) {
+            addBook();
+        }
+    });
+
     @Override
     public void init(VaadinRequest request) {
 
@@ -50,22 +58,15 @@ public class BookUI extends UI {
             }
         });
 
-        Button addButton = new Button("+", new Button.ClickListener() {
-
-            @Override
-            public void buttonClick(Button.ClickEvent event) {
-                addBook();
-            }
-        });
-
-        setContent(new MVerticalLayout(header, addButton, bookTable));
+        setContent(new MVerticalLayout(header, addNewButton, bookTable));
 
         // Automatically set identifiers for fields in this instance
         TbHelper.assignIndentifiers(this);
-        
+
         // for lazy initialized components, it is better set idenfiers 
         // once attached
-        bookEditor.addAttachListener(e->TbHelper.assignIndentifiers(bookEditor));
+        bookEditor.addAttachListener(e -> TbHelper.
+                assignIndentifiers(bookEditor));
 
     }
 
