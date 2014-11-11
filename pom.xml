@@ -104,6 +104,14 @@
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
+        
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-warp</artifactId>
+            <type>pom</type>
+            <scope>test</scope>
+            <version>1.0.0.Alpha7</version>
+        </dependency>
     </dependencies>
 
     <build>
