@@ -1,7 +1,9 @@
 package org.vaadin.tbtests;
 
 import java.net.URL;
+
 import javax.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
@@ -48,28 +50,29 @@ public class MixingClientAndServerUsingWarpIT {
         return war;
     }
 
+    /*
+     * tb-drone extension automatically modifies the injected WebDriver
+     * to contain all TestBench goodies. So now the WebDriver has
+     * all goodies of both Vaadin TestBench and Arquillian Graphene.
+     * 
+     * Note, as our test is using page object pattern with Graphene goodies, the 
+     * WebDriver reference is not actually needed in this example.
+     */
+    @Drone
+    WebDriver driver;
+
+    /* 
+     * In case you need to deployment url, you can get it like this. Not needed
+     * in this example as using page object pattern together with Graphene.
+     */
+    @ArquillianResource
+    private URL deploymentUrl;
+
     @Test
     public void testUIAndService(@InitialPage MainPage mainPage) {
         final String nameOfNewBook = "Book of Vaadin";
 
         Warp.initiate(new Activity() {
-            /*
-             * tb-drone extension automatically modifies the injected WebDriver
-             * to contain all TestBench goodies. So now the WebDriver has
-             * all goodies of both Vaadin TestBench and Arquillian Graphene.
-             * 
-             * Note, as our test is using page object pattern with Graphene goodies, the 
-             * WebDriver reference is not actually needed in this example.
-             */
-            @Drone
-            WebDriver driver;
-
-            /* 
-             * In case you need to deployment url, you can get it like this. Not needed
-             * in this example as using page object pattern together with Graphene.
-             */
-            @ArquillianResource
-            private URL deploymentUrl;
 
             EditorFragment editorFragment;
 
@@ -87,7 +90,11 @@ public class MixingClientAndServerUsingWarpIT {
 
             }
 
-        }).inspect(new Inspection() {
+        })
+        //.observe(HttpFilters.request()...) // Used as filter to only run Inspection on certain requests
+        .inspect(new Inspection() {
+            private static final long serialVersionUID = 1L;
+
             @Inject
             BookService service;
 

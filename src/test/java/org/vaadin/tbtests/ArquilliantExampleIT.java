@@ -67,7 +67,7 @@ public class ArquilliantExampleIT {
      * in this example as using page object pattern together with Graphene.
      */
     @ArquillianResource
-   private URL deploymentUrl;
+    private URL deploymentUrl;
 
     @Test
     public void testUIAndService(@InitialPage MainPage mainPage) {
